@@ -11,13 +11,13 @@ void EXTI9_5_IRQHandler(void)
 {
 	if(EXTI->PR & EXTI_PR_PR9)
 	{
-		EXTI->PR &=~ EXTI_PR_PR9;
+		EXTI->PR |= EXTI_PR_PR9;
 		exti_pa9_callback();
 
 	}
 	if(EXTI->PR & EXTI_PR_PR7)
 	{
-		EXTI->PR &=~ (EXTI_PR_PR7);
+		EXTI->PR |= (EXTI_PR_PR7);
 		exti_pc7_callback();
 	}
 
