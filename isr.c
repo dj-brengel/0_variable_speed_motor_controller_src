@@ -24,12 +24,6 @@ void EXTI9_5_IRQHandler(void)
 }
 
 
-/*void exti_pa9_callback(void)
-{
-	GPIOC->BSRR |= GPIO_BSRR_BR_7;
-	GPIOA->BSRR |= GPIO_BSRR_BS_9;
-
-}*/
 
 
 void exti_pc7_callback(void)
