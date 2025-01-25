@@ -42,6 +42,26 @@ void pc7_exti_init(void)
 }
 
 
+
+
+void pc13_exti_init(void)
+{
+	__disable_irq();
+
+	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOCEN;
+	RCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN;
+
+	SYSCFG->EXTICR[3] |= SYSCFG_EXTICR4_EXTI13_PC;
+
+	EXTI->IMR |= EXTI_IMR_MR13;
+	EXTI->FTSR |= EXTI_FTSR_TR13;
+
+	NVIC_EnableIRQ(EXTI15_10_IRQn);
+
+	__enable_irq();
+}
+
+
 /*****Steps for enabling interrupt for a GPIO pin*****/
 
 /*

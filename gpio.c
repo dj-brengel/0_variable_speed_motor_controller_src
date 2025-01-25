@@ -35,7 +35,6 @@ void pc7_input_pd_init(void)
 
 
 
-
 /*****Initialize pins PA8 and PB10*****/
 
 void pa8_output_init(void)
@@ -53,9 +52,6 @@ void pb10_output_init(void)
 	GPIOB->MODER |= GPIO_MODER_MODER10_0; //set as output pin
 	GPIOB->MODER &=~ GPIO_MODER_MODER10_1;
 }
-
-
-
 
 
 
@@ -77,7 +73,19 @@ void pa3_usart2_rx(void)
 
 
 
+/*****Configure PC13 as input, PA5 as output*****/
+void pc13_input_init(void)
+{
+	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOCEN;
+	GPIOC->MODER &=~ GPIO_MODER_MODE13_1;
+}
 
+
+void pa5_output_init(void)
+{
+	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
+	GPIOA->MODER |= GPIO_MODER_MODE5_0;
+}
 
 
 
