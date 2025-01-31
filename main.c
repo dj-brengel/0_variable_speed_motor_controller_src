@@ -8,7 +8,7 @@
 
 
 ring_buffer tx_buffer;  		//creates buffer struct
-uint8_t tx_buffer_data[16];		//creates data array for buffer struct
+uint8_t tx_buffer_data[32];		//creates data array for buffer struct
 
 
 
@@ -18,7 +18,7 @@ int main(void)
 {
 	usart2_rxtx_init();
 
-	rb_init(&tx_buffer,tx_buffer_data,16);
+	rb_init(&tx_buffer,tx_buffer_data,32);
 
 	pa9_input_pd_init();
 	pc7_input_pd_init();
@@ -34,22 +34,6 @@ int main(void)
 	pc13_exti_init();
 
 
-	usart_write('M');
-	usart_write('o');
-	usart_write('t');
-	usart_write('o');
-	usart_write('r');
-	usart_write('I');
-	usart_write('n');
-	usart_write('i');
-	usart_write('t');
-	usart_write('i');
-	usart_write('a');
-	usart_write('l');
-	usart_write('i');
-	usart_write('z');
-	usart_write('e');
-	usart_write('d');
 
 
 

@@ -19,7 +19,14 @@ void usart2_rxtx_init(void)
 }
 
 
+void usart2_disable(void)
+{
+	USART2->CR1 &=~ USART_CR1_UE;
+	USART2->CR1 &=~ USART_CR1_RE;
+	USART2->CR1 &=~ USART_CR1_TE;
+	RCC->APB1ENR &=~ RCC_APB1ENR_USART2EN;
 
+}
 
 
 
@@ -52,4 +59,13 @@ void usart_write(int ch)
 
 }
 
+void usart_print(char str[])
+{
+	int i = 0;
+	while(str[i] != '\0')
+	{
+		usart_write(str[i]);
+		i++;
+	}
+}
 

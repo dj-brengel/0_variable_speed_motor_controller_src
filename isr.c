@@ -1,6 +1,6 @@
 #include<isr.h>
 #include<ring_buffer.h>
-
+#include<usart.h>
 
 
 
@@ -47,12 +47,15 @@ void EXTI15_10_IRQHandler(void)
 	if(EXTI->PR & EXTI_PR_PR13)
 	{
 		exti_pc13_callback();
+		EXTI->PR |= EXTI_PR_PR13;
 	}
 }
 
 void exti_pc13_callback(void)
 {
 	GPIOA->BSRR |= GPIO_BSRR_BS5;
+	usart_print("Motor initialized\n");
+
 }
 
 
@@ -79,6 +82,7 @@ void usart_callback(void)
 	else
 	{
 	USART2->CR1 &=~ USART_CR1_TXEIE;
+
 	}
 }
 
