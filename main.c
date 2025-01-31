@@ -32,6 +32,9 @@ int main(void)
 	pc13_exti_init();
 
 	usart2_rxtx_init();
+
+	usart_write('M');
+
 }
 
 

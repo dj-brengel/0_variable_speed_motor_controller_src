@@ -74,7 +74,7 @@ void usart_callback(void)
 	rb_get(&tx_buffer);
 	if(!(rb_empty(&tx_buffer)))
 	{
-
+		USART2->DR = ring_buffer_peek(&tx_buffer);
 	}
 }
 

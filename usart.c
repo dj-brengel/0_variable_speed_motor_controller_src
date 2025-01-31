@@ -1,5 +1,6 @@
 #include<usart.h>
 #include<gpio.h>
+#include<ring_buffer.h>
 
 
 void usart2_rxtx_init(void)
@@ -45,8 +46,12 @@ int __io_putchar(int ch)
 
 void usart_write(int ch)
 {
-	while(!(USART2->SR & USART_SR_TXE));
-	USART2->DR = ch;
+	rb_put(&tx_buffer, ch);
+	if(rb_empty(&tx_buffer))
+	{
+		USART2->DR = ring_buffer_peek(&tx_buffer);
+	}
+
 }
 
 
