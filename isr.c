@@ -76,8 +76,10 @@ void usart_callback(void)
 	{
 		USART2->DR = ring_buffer_peek(&tx_buffer);
 	}
+	else
+	{
 	USART2->CR1 &=~ USART_CR1_TXEIE;
-
+	}
 }
 
 

@@ -10,7 +10,7 @@ void usart2_rxtx_init(void)
 	USART2->CR1 |= USART_CR1_RE;
 	USART2->CR1 |= USART_CR1_TE;
 	USART2->CR1 |= USART_CR1_UE;
-	USART2->CR1 &=~ USART_CR1_TXEIE;
+	USART2->CR1 |= USART_CR1_TXEIE;
 	NVIC_EnableIRQ(USART2_IRQn);
 	pa2_usart2_tx();
 	pa3_usart2_rx();
@@ -41,7 +41,6 @@ void usart_set_bd(USART_TypeDef* USARTx, uint32_t PeriphClock, uint32_t Baudrate
 
 void usart_write(int ch)
 {
-	USART2->CR1 |= USART_CR1_TXEIE;
 	const bool tx_ongoing = !rb_empty(&tx_buffer);
 	rb_put(&tx_buffer, ch);
 	if(!tx_ongoing)
