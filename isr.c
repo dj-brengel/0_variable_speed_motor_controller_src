@@ -53,14 +53,14 @@ void EXTI15_10_IRQHandler(void)
 void exti_pc13_callback(void)
 {
 	GPIOA->BSRR |= GPIO_BSRR_BS5;
-	printf("Motor initialized...");
+
 }
 
 
 
 
 
-void USART_IRQHandler(void)
+void USART2_IRQHandler(void)
 {
 	if(USART2->SR & USART_SR_TXE)
 	{
