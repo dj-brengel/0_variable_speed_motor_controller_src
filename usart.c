@@ -6,11 +6,12 @@
 void usart2_rxtx_init(void)
 {
 	RCC->APB1ENR |= RCC_APB1ENR_USART2EN;
-	USART2->DR = 0;
+	RCC->APB1RSTR |= RCC_APB1RSTR_USART2RST;
+	RCC->APB1RSTR &=~ RCC_APB1RSTR_USART2RST;
 	USART2->CR1 |= USART_CR1_RE;
 	USART2->CR1 |= USART_CR1_TE;
 	USART2->CR1 |= USART_CR1_UE;
-	USART2->CR1 |= USART_CR1_TXEIE;
+	USART2->CR1 &=~ USART_CR1_TXEIE;
 	NVIC_EnableIRQ(USART2_IRQn);
 	pa2_usart2_tx();
 	pa3_usart2_rx();
@@ -46,6 +47,7 @@ void usart_write(int ch)
 	if(!tx_ongoing)
 	{
 		USART2->DR = ring_buffer_peek(&tx_buffer);
+		USART2->CR1 |= USART_CR1_TXEIE;
 	}
 
 }

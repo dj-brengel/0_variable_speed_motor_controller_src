@@ -17,7 +17,6 @@ void rb_init(ring_buffer* rb, uint8_t* buf, uint8_t size) //you need to give thi
 void rb_put(ring_buffer* rb, uint8_t data) //takes pointer to struct and data to add to buffer
 {
 	rb->buffer[rb->head] = data; //accesses rb->buffer and sets the "headth" index equal to "data."
-	rb->head++;
 	rb->head = (rb->head + 1) % rb->size; //increment head pointer
 }
 
@@ -25,7 +24,6 @@ void rb_put(ring_buffer* rb, uint8_t data) //takes pointer to struct and data to
 uint8_t rb_get(ring_buffer* rb)
 {
 	const uint8_t data = rb->buffer[rb->tail]; //creates a variable "data" and sets it equal to the value stored in the array rb->buffer with index rb->tail
-	rb->tail++;
 	rb->tail = (rb->tail + 1) % rb->size;
 	return data;
 }

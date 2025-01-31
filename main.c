@@ -16,6 +16,8 @@ uint8_t tx_buffer_data[16];		//creates data array for buffer struct
 
 int main(void)
 {
+	usart2_rxtx_init();
+
 	rb_init(&tx_buffer,tx_buffer_data,16);
 
 	pa9_input_pd_init();
@@ -31,13 +33,25 @@ int main(void)
 	pc7_exti_init();
 	pc13_exti_init();
 
-	usart2_rxtx_init();
 
 	usart_write('M');
 	usart_write('o');
 	usart_write('t');
 	usart_write('o');
 	usart_write('r');
+	usart_write('I');
+	usart_write('n');
+	usart_write('i');
+	usart_write('t');
+	usart_write('i');
+	usart_write('a');
+	usart_write('l');
+	usart_write('i');
+	usart_write('z');
+	usart_write('e');
+	usart_write('d');
+
+
 
 
 
