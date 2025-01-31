@@ -42,16 +42,45 @@ void exti_pa9_callback(void)
 /***********************************************************************************************/
 
 
+int init = 0;
+
+
+
 void EXTI15_10_IRQHandler(void)
 {
-	if(EXTI->PR & EXTI_PR_PR13)
-	{
-		exti_pc13_callback();
+	if(init == 0) {
+		exti_pc13_callback_initialize();
 		EXTI->PR |= EXTI_PR_PR13;
+		init = 1;
+	}
+	else {
+		exti_pc13_callback_shutdown();
+		EXTI->PR |= EXTI_PR_PR13;
+		init = 0;
 	}
 }
 
-void exti_pc13_callback(void)
+
+
+//void EXTI15_10_IRQHandler(void)
+//{
+//	if(EXTI->PR & EXTI_PR_PR13)
+//	{
+//		exti_pc13_callback();
+//		EXTI->PR |= EXTI_PR_PR13;
+//	}
+//}
+
+
+
+void exti_pc13_callback_shutdown(void)
+{
+	GPIOA->BSRR |= GPIO_BSRR_BR5;
+	usart_print("Motor shut down\n\r");
+}
+
+
+void exti_pc13_callback_initialize(void)
 {
 	GPIOA->BSRR |= GPIO_BSRR_BS5;
 	usart_print("Motor initialized\n\r");
