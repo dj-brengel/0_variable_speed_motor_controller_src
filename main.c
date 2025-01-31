@@ -4,17 +4,11 @@
 #include<isr.h>
 #include<stdio.h>
 #include<usart.h>
+#include<ring_buffer.h>
 
 
-
-
-
-
-
-
-
-
-
+ring_buffer tx_buffer;  		//creates buffer struct
+uint8_t tx_buffer_data[16];		//creates data array for buffer struct
 
 
 
@@ -22,6 +16,8 @@
 
 int main(void)
 {
+	rb_init(&tx_buffer,tx_buffer_data,16);
+
 	pa9_input_pd_init();
 	pc7_input_pd_init();
 
