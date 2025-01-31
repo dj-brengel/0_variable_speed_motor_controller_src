@@ -54,7 +54,7 @@ void EXTI15_10_IRQHandler(void)
 void exti_pc13_callback(void)
 {
 	GPIOA->BSRR |= GPIO_BSRR_BS5;
-	usart_print("Motor initialized\n");
+	usart_print("Motor initialized\n\r");
 
 }
 
