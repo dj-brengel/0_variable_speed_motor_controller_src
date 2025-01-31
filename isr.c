@@ -39,7 +39,7 @@ void exti_pa9_callback(void)
 
 
 
-
+/***********************************************************************************************/
 
 
 void EXTI15_10_IRQHandler(void)
@@ -53,9 +53,10 @@ void EXTI15_10_IRQHandler(void)
 void exti_pc13_callback(void)
 {
 	GPIOA->BSRR |= GPIO_BSRR_BS5;
-
 }
 
+
+/*************************************************************************************************/
 
 
 
@@ -70,5 +71,27 @@ void USART2_IRQHandler(void)
 
 void usart_callback(void)
 {
+	rb_get(&tx_buffer);
+	if(!(rb_empty(&tx_buffer)))
+	{
 
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
