@@ -13,7 +13,7 @@ void usart2_rxtx_init(void)
 	NVIC_EnableIRQ(USART2_IRQn);
 	pa2_usart2_tx();
 	pa3_usart2_rx();
-	usart_set_bd(USART2, APB1_CLK, BAUDRATE_115200);
+	usart_set_bd(USART2, APB1_CLK, 115200);
 }
 
 
@@ -37,17 +37,12 @@ void usart_set_bd(USART_TypeDef* USARTx, uint32_t PeriphClock, uint32_t Baudrate
 
 
 
-int __io_putchar(int ch)
-{
-	usart_write(ch);
-	return(ch);
-}
-
 
 void usart_write(int ch)
 {
+	const bool tx_ongoing = !rb_empty(&tx_buffer);
 	rb_put(&tx_buffer, ch);
-	if(rb_empty(&tx_buffer))
+	if(!tx_ongoing)
 	{
 		USART2->DR = ring_buffer_peek(&tx_buffer);
 	}

@@ -33,7 +33,7 @@ int main(void)
 
 	usart2_rxtx_init();
 
-	usart_write('M');
+	usart_write('l');
 
 }
 

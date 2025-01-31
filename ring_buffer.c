@@ -3,15 +3,6 @@
 
 
 
-/*
- * In the function below, the first argument is a variable "rb" of the "ring_buffer*" type.
- * This means that it holds the address of a ring_buffer structure.
- * If "rb" HOLDS the address of such a structure, then I need to GIVE it the address of
- * such a structure.
- *
- * The second function asks for a pointer, but the buffer passed into it will already be a pointer. Thus,
- * no & needed.
- * */
 
 void rb_init(ring_buffer* rb, uint8_t* buf, uint8_t size) //you need to give this: the address of a ring_buffer struct, the address of the buffer within that struct, and the buffer size
 {
@@ -33,6 +24,7 @@ void rb_put(ring_buffer* rb, uint8_t data) //takes pointer to struct and data to
 uint8_t rb_get(ring_buffer* rb)
 {
 	const uint8_t data = rb->buffer[rb->tail]; //creates a variable "data" and sets it equal to the value stored in the array rb->buffer with index rb->tail
+	rb->tail++;
 	rb->tail = (rb->tail + 1) % rb->size;
 	return data;
 }
